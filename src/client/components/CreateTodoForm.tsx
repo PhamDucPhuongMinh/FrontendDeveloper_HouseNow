@@ -46,6 +46,15 @@ export const CreateTodoForm = () => {
         type="text"
         placeholder="Add todo"
         value={todoBody}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault()
+            createTodo({
+              body: todoBody,
+            })
+            setTodoBody('')
+          }
+        }}
         onChange={(e) => {
           setTodoBody(e.target.value)
         }}
@@ -53,6 +62,7 @@ export const CreateTodoForm = () => {
       />
 
       <button
+        className="rounded-full bg-[#334155] px-4 py-2 font-bold text-white hover:bg-[#1e293b]"
         type="button"
         disabled={isCreatingTodo}
         onClick={() => {

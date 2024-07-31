@@ -1,3 +1,5 @@
+import * as Tabs from '@radix-ui/react-tabs'
+
 import { CreateTodoForm } from '@/client/components/CreateTodoForm'
 import { TodoList } from '@/client/components/TodoList'
 
@@ -24,9 +26,43 @@ const Index = () => {
           Todo App
         </h1>
 
-        <div className="pt-10">
-          <TodoList />
-        </div>
+        <Tabs.Root defaultValue="all" className="mt-10">
+          <Tabs.List aria-label="Filter todo status" className="flex gap-2">
+            <Tabs.Trigger
+              className="rounded-full border-2 border-[#E2E8F0] bg-white px-6 py-2 font-bold  text-[#334155] data-[state=active]:border-[#334155] data-[state=active]:bg-[#334155] data-[state=active]:text-white"
+              value="all"
+            >
+              All
+            </Tabs.Trigger>
+            <Tabs.Trigger
+              className="rounded-full border-2 border-[#E2E8F0] bg-white px-6 py-2 font-bold  text-[#334155] data-[state=active]:border-[#334155] data-[state=active]:bg-[#334155] data-[state=active]:text-white"
+              value="pending"
+            >
+              Pending
+            </Tabs.Trigger>
+            <Tabs.Trigger
+              className="rounded-full border-2 border-[#E2E8F0] bg-white px-6 py-2 font-bold  text-[#334155] data-[state=active]:border-[#334155] data-[state=active]:bg-[#334155] data-[state=active]:text-white"
+              value="completed"
+            >
+              Completed
+            </Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content className="TabsContent" value="all">
+            <div className="pt-10">
+              <TodoList filter="all" />
+            </div>
+          </Tabs.Content>
+          <Tabs.Content className="TabsContent" value="pending">
+            <div className="pt-10">
+              <TodoList filter="pending" />
+            </div>
+          </Tabs.Content>
+          <Tabs.Content className="TabsContent" value="completed">
+            <div className="pt-10">
+              <TodoList filter="completed" />
+            </div>
+          </Tabs.Content>
+        </Tabs.Root>
 
         <div className="pt-10">
           <CreateTodoForm />
