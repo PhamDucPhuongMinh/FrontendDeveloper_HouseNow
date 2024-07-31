@@ -94,7 +94,11 @@ export const TodoList: React.FC<Props> = ({ filter }) => {
     <ul className="grid grid-cols-1 gap-y-3" ref={parent}>
       {todos.map((todo) => (
         <li key={todo.id}>
-          <div className="flex items-center rounded-12 border border-gray-200 px-4 py-3 shadow-sm">
+          <div
+            className={`flex items-center rounded-12 border border-gray-200 px-4 py-3 shadow-sm ${
+              todo.status === 'completed' ? 'bg-[#f6f9fb]' : ''
+            }`}
+          >
             <Checkbox.Root
               id={String(todo.id)}
               className="flex h-6 w-6 items-center justify-center rounded-6 border border-gray-300 focus:border-gray-700 focus:outline-none data-[state=checked]:border-gray-700 data-[state=checked]:bg-gray-700"
@@ -122,7 +126,7 @@ export const TodoList: React.FC<Props> = ({ filter }) => {
             </label>
             <button
               className="ml-auto"
-              aria-label={`Remove todo item ${todo.id}`}
+              aria-label={`Remove todo item ${todo.body}`}
               disabled={isDeletingTodo}
               onClick={() => {
                 deleteTodo({
